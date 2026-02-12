@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Hotel Miramar Monaco • Luxury Waterfront Stay</title>
 
-  <!-- Luxury fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Palette “sea luxury” (navy + champagne gold + ivory) */
       --bg: #070b10;
       --navy: #0b1f2a;
       --navy2:#08151d;
@@ -44,7 +42,6 @@
       overflow-x:hidden;
     }
 
-    /* HERO background image (official site image) */
     .hero{
       min-height: 100svh;
       position:relative;
@@ -79,7 +76,6 @@
       gap: 18px;
     }
 
-    /* Top bar */
     .topbar{
       display:flex;
       align-items:center;
@@ -190,7 +186,6 @@
       color: var(--ivory);
     }
 
-    /* Main hero content */
     .heroGrid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
@@ -268,7 +263,6 @@
       max-width: 62ch;
     }
 
-    /* Big central CTA */
     .ctaRow{
       position:relative;
       margin-top: 20px;
@@ -320,7 +314,6 @@
       color: rgba(246,241,230,.68);
     }
 
-    /* Side cards (weather + highlights) */
     .side{
       display:flex;
       flex-direction:column;
@@ -431,7 +424,6 @@
       line-height: 1.45;
     }
 
-    /* Lower sections */
     .sections{
       position:relative;
       margin-top: 10px;
@@ -483,7 +475,6 @@
       line-height: 1.5;
     }
 
-    /* Footer */
     footer{
       margin-top: 6px;
       border-top: 1px solid rgba(255,255,255,.10);
@@ -498,7 +489,6 @@
     footer a{ color: rgba(224,194,122,.92); text-decoration:none; }
     footer a:hover{ text-decoration:underline; }
 
-    /* Small helpers */
     .icon{
       width: 16px; height: 16px;
       display:inline-block;
@@ -543,7 +533,6 @@
       </div>
 
       <div class="heroGrid">
-        <!-- LEFT: Emotional headline + BIG AI button -->
         <div class="headlineCard">
           <div class="kicker">
             <span class="tag"><span class="dot"></span><span id="t_kicker1">Luxury & Discovery</span></span>
@@ -561,7 +550,10 @@
           </p>
 
           <div class="ctaRow">
-            <a class="ctaBig" id="ctaAI" href="ai.html">
+            <!-- ✅ CTA: goes to your Lia link -->
+            <a class="ctaBig" id="ctaAI"
+               href="https://lia.gamaleau.it/?knowledgeid=458b864e-3a6c-4764-b878-934fa7e972c7&avatarid=69cf601f-b35b-4d1b-a701-c854d223b5a5&lang=it"
+               target="_blank" rel="noopener">
               <span aria-hidden="true">✨</span>
               <span id="t_cta_big">Parla con l’assistente AI dell’Hotel</span>
             </a>
@@ -577,7 +569,6 @@
           </p>
         </div>
 
-        <!-- RIGHT: Weather + Highlights -->
         <div class="side">
           <div class="card">
             <div class="weatherTop">
@@ -629,7 +620,6 @@
         </div>
       </div>
 
-      <!-- Lower editorial sections -->
       <div class="sections">
         <div class="grid3">
           <article class="mediaCard">
@@ -675,7 +665,7 @@
             </div>
           </div>
           <div>
-            <div id="t_footerNote">Landing demo • CTA AI → ai.html</div>
+            <div id="t_footerNote">Landing demo • CTA AI → link esterno</div>
             <div><a href="https://www.hotelmiramar.mc/" target="_blank" rel="noopener" id="t_footerLink">Sito ufficiale</a></div>
           </div>
         </footer>
@@ -684,6 +674,14 @@
   </section>
 
   <script>
+    // --------------------------------------------
+    // Your AI URL (we keep lang=it/fr in sync)
+    // --------------------------------------------
+    const LIA_BASE =
+      "https://lia.gamaleau.it/?knowledgeid=458b864e-3a6c-4764-b878-934fa7e972c7&avatarid=69cf601f-b35b-4d1b-a701-c854d223b5a5&lang=";
+
+    const ctaAI = document.getElementById("ctaAI");
+
     // -------------------------------
     // i18n (IT/FR) + auto-detect
     // -------------------------------
@@ -721,7 +719,7 @@
         footerHotel: "Hotel Miramar Monaco",
         footerAddr: "1 avenue JF Kennedy • 98000 Monaco",
         footerTelLabel: "Tel:",
-        footerNote: "Landing demo • CTA AI → ai.html",
+        footerNote: "Landing demo • CTA AI → link esterno",
         footerLink: "Sito ufficiale",
         wxLoading: "Caricamento in corso…",
         wxFallback: "Parzialmente soleggiato • Dati di esempio"
@@ -759,7 +757,7 @@
         footerHotel: "Hotel Miramar Monaco",
         footerAddr: "1 avenue JF Kennedy • 98000 Monaco",
         footerTelLabel: "Tél :",
-        footerNote: "Landing démo • CTA IA → ai.html",
+        footerNote: "Landing démo • CTA IA → lien externe",
         footerLink: "Site officiel",
         wxLoading: "Chargement…",
         wxFallback: "Partiellement ensoleillé • Données d’exemple"
@@ -844,6 +842,9 @@
       els.footerNote.textContent = t.footerNote;
       els.footerLink.textContent = t.footerLink;
 
+      // ✅ Keep AI link language in sync
+      ctaAI.href = LIA_BASE + (lang === "fr" ? "fr" : "it");
+
       btnIT.classList.toggle("active", lang === "it");
       btnFR.classList.toggle("active", lang === "fr");
 
@@ -854,7 +855,6 @@
     btnIT.addEventListener("click", () => setLang("it"));
     btnFR.addEventListener("click", () => setLang("fr"));
 
-    // Auto language (browser) with saved override
     (function initLang(){
       const saved = localStorage.getItem("lang");
       if (saved === "it" || saved === "fr") return setLang(saved);
@@ -902,7 +902,6 @@
       const lang = document.documentElement.lang || "it";
       wxDesc.textContent = I18N[lang].wxLoading;
 
-      // Monaco (Port Hercule area)
       const lat = 43.7369725;
       const lon = 7.4229654;
 
@@ -938,7 +937,6 @@
         t2.textContent = `${mins[1]}° / ${maxs[1]}°`;
         t3.textContent = `${mins[2]}° / ${maxs[2]}°`;
       } catch(e){
-        // Fallback (example values)
         const lang = document.documentElement.lang || "it";
         wxTemp.textContent = "14°C";
         wxDesc.textContent = I18N[lang].wxFallback;
@@ -954,13 +952,6 @@
     }
 
     loadWeather();
-
-    // Reload weather text if language changes
-    const _setLang = setLang;
-    setLang = function(lang){
-      _setLang(lang);
-      loadWeather();
-    };
   </script>
 </body>
 </html>
