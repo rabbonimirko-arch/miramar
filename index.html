@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Hotel Miramar Monaco • Luxury Waterfront Stay</title>
+
+  <!-- Luxury fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Palette “sea luxury” (navy + champagne gold + ivory) */
+      --bg: #070b10;
+      --navy: #0b1f2a;
+      --navy2:#08151d;
+      --ivory:#f6f1e6;
+      --muted:#c9c4b7;
+      --gold:#c8a35a;
+      --gold2:#e0c27a;
+      --teal:#2f7f8b;
+
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.10);
+      --stroke: rgba(255,255,255,.14);
+
+      --shadow: 0 20px 70px rgba(0,0,0,.55);
+      --radius: 22px;
+
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 20% 10%, rgba(47,127,139,.18), transparent 55%),
+                  radial-gradient(900px 700px at 80% 10%, rgba(200,163,90,.16), transparent 55%),
+                  linear-gradient(180deg, var(--navy2), var(--bg));
+      color: var(--ivory);
+      overflow-x:hidden;
+    }
+
+    /* HERO background image (official site image) */
+    .hero{
+      min-height: 100svh;
+      position:relative;
+      display:flex;
+      align-items:stretch;
+      justify-content:center;
+      padding: 22px 18px 46px;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(7,11,16,.78) 0%, rgba(7,11,16,.62) 35%, rgba(7,11,16,.92) 100%),
+        radial-gradient(1000px 600px at 40% 15%, rgba(200,163,90,.20), transparent 60%),
+        url("https://www.hotelmiramar.mc/_novaimg/4804619-1462278_0_0_2200_1600_1925_1400.jpg") center/cover no-repeat;
+      filter:saturate(1.06) contrast(1.04);
+      transform: scale(1.02);
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(11,31,42,.28), rgba(7,11,16,.06), rgba(11,31,42,.26));
+      pointer-events:none;
+    }
+
+    .wrap{
+      position:relative;
+      width: min(var(--max), calc(100% - 0px));
+      margin: 0 auto;
+      display:flex;
+      flex-direction:column;
+      gap: 18px;
+    }
+
+    /* Top bar */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 14px 12px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 220px;
+    }
+    .mark{
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      background:
+        radial-gradient(16px 16px at 30% 30%, rgba(224,194,122,.9), rgba(200,163,90,.35) 60%, transparent 70%),
+        linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+      border: 1px solid rgba(200,163,90,.45);
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .mark:before{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 220deg, transparent, rgba(224,194,122,.32), transparent 60%);
+      animation: spin 8s linear infinite;
+      opacity:.7;
+    }
+    @keyframes spin{ to{ transform: rotate(360deg);} }
+    .mark span{
+      position:relative;
+      font-family: "Playfair Display", serif;
+      letter-spacing:.5px;
+      font-weight:700;
+      color: var(--ivory);
+      font-size: 14px;
+      opacity:.95;
+    }
+    .brand h1{
+      margin:0;
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing:.3px;
+      line-height:1.05;
+    }
+    .brand p{
+      margin: 2px 0 0;
+      color: rgba(246,241,230,.72);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing:.2px;
+    }
+
+    .right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,.26);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      font-size: 12px;
+      color: rgba(246,241,230,.86);
+      max-width: 100%;
+    }
+    .pill strong{
+      color: var(--ivory);
+      font-weight: 600;
+    }
+    .lang{
+      display:flex;
+      border-radius: 999px;
+      overflow:hidden;
+      border: 1px solid rgba(200,163,90,.42);
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .lang button{
+      appearance:none;
+      border:0;
+      background: transparent;
+      color: rgba(246,241,230,.78);
+      padding: 10px 12px;
+      font-weight: 600;
+      letter-spacing:.2px;
+      cursor:pointer;
+    }
+    .lang button.active{
+      background: linear-gradient(135deg, rgba(200,163,90,.30), rgba(200,163,90,.10));
+      color: var(--ivory);
+    }
+
+    /* Main hero content */
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      padding: 8px 12px 0;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .brand{ min-width: unset; }
+    }
+
+    .headlineCard{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      padding: 26px 22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .headlineCard:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(900px 360px at 25% 0%, rgba(200,163,90,.20), transparent 60%),
+                  radial-gradient(900px 360px at 80% 20%, rgba(47,127,139,.20), transparent 60%);
+      pointer-events:none;
+      opacity:.8;
+    }
+
+    .kicker{
+      position:relative;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom: 14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(200,163,90,.35);
+      background: rgba(0,0,0,.22);
+      color: rgba(246,241,230,.90);
+      font-size: 12px;
+      letter-spacing:.2px;
+    }
+    .dot{
+      width: 7px; height: 7px;
+      border-radius: 999px;
+      background: var(--gold2);
+      box-shadow: 0 0 0 4px rgba(200,163,90,.16);
+    }
+
+    .headline{
+      position:relative;
+      margin:0;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-size: clamp(30px, 4.2vw, 54px);
+      line-height: 1.05;
+      letter-spacing: .2px;
+    }
+    .sub{
+      position:relative;
+      margin: 14px 0 0;
+      font-size: 15px;
+      line-height: 1.55;
+      color: rgba(246,241,230,.82);
+      max-width: 62ch;
+    }
+
+    /* Big central CTA */
+    .ctaRow{
+      position:relative;
+      margin-top: 20px;
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .ctaBig{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      color: #0b0f13;
+      font-weight: 800;
+      letter-spacing:.2px;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 20px 60px rgba(200,163,90,.22), 0 12px 26px rgba(0,0,0,.35);
+      min-height: 54px;
+    }
+    .ctaBig:hover{ filter: brightness(1.03); transform: translateY(-1px); }
+    .ctaBig:active{ transform: translateY(0px); }
+    .ctaGhost{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      color: rgba(246,241,230,.92);
+      font-weight: 650;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      min-height: 54px;
+    }
+    .ctaGhost:hover{ background: rgba(255,255,255,.08); }
+
+    .fine{
+      position:relative;
+      margin: 12px 0 0;
+      font-size: 12px;
+      color: rgba(246,241,230,.68);
+    }
+
+    /* Side cards (weather + highlights) */
+    .side{
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+    }
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 14px 50px rgba(0,0,0,.42);
+      padding: 16px 16px;
+      overflow:hidden;
+      position:relative;
+    }
+    .card h3{
+      margin:0 0 10px;
+      font-family:"Playfair Display", serif;
+      font-size: 16px;
+      letter-spacing:.2px;
+    }
+    .muted{
+      color: rgba(246,241,230,.78);
+      font-size: 12.5px;
+      line-height: 1.45;
+      margin:0;
+    }
+
+    .weatherTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .wxMain{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .temp{
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing:-.5px;
+      line-height: 1;
+    }
+    .wxMeta{
+      font-size: 12.5px;
+      color: rgba(246,241,230,.78);
+    }
+    .wxBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(47,127,139,.35);
+      background: rgba(47,127,139,.14);
+      color: rgba(246,241,230,.90);
+      font-size: 12px;
+      white-space:nowrap;
+    }
+
+    .forecast{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .day{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      padding: 10px 10px;
+    }
+    .day .d{
+      font-size: 12px;
+      color: rgba(246,241,230,.72);
+      margin-bottom: 6px;
+    }
+    .day .t{
+      font-size: 14px;
+      font-weight: 750;
+      color: rgba(246,241,230,.92);
+    }
+
+    .highlights{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .hl{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      padding: 12px 12px;
+    }
+    .hl b{
+      display:block;
+      margin-bottom: 6px;
+      color: rgba(246,241,230,.95);
+      font-size: 13px;
+    }
+    .hl span{
+      color: rgba(246,241,230,.74);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    /* Lower sections */
+    .sections{
+      position:relative;
+      margin-top: 10px;
+      padding: 0 12px 44px;
+      display:flex;
+      flex-direction:column;
+      gap: 18px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 920px){
+      .grid3{ grid-template-columns: 1fr; }
+    }
+
+    .mediaCard{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      overflow:hidden;
+      box-shadow: 0 16px 55px rgba(0,0,0,.40);
+    }
+    .media{
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+      position:relative;
+    }
+    .media:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.55));
+    }
+    .mediaBody{
+      padding: 14px 14px 16px;
+    }
+    .mediaBody h4{
+      margin:0 0 8px;
+      font-family:"Playfair Display", serif;
+      font-size: 16px;
+      letter-spacing:.2px;
+    }
+    .mediaBody p{
+      margin:0;
+      color: rgba(246,241,230,.76);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 6px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding: 18px 12px 0;
+      color: rgba(246,241,230,.72);
+      font-size: 12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    footer a{ color: rgba(224,194,122,.92); text-decoration:none; }
+    footer a:hover{ text-decoration:underline; }
+
+    /* Small helpers */
+    .icon{
+      width: 16px; height: 16px;
+      display:inline-block;
+      border-radius: 4px;
+      background: rgba(11,31,42,.18);
+      border: 1px solid rgba(255,255,255,.16);
+      position:relative;
+      overflow:hidden;
+    }
+    .icon:before{
+      content:"";
+      position:absolute; inset:-50%;
+      background: radial-gradient(circle at 30% 30%, rgba(224,194,122,.70), transparent 55%),
+                  radial-gradient(circle at 70% 60%, rgba(47,127,139,.55), transparent 55%);
+    }
+  </style>
+</head>
+
+<body>
+  <section class="hero">
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand" aria-label="Hotel brand">
+          <div class="mark" aria-hidden="true"><span>HM</span></div>
+          <div>
+            <h1 id="t_brand">Hotel Miramar Monaco</h1>
+            <p id="t_brand_sub">Sea-front • Port Hercule • Monte-Carlo</p>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="pill" role="status" aria-live="polite">
+            <span class="icon" aria-hidden="true"></span>
+            <span id="t_locationPill"><strong>Monaco</strong> • Waterfront Location</span>
+          </div>
+
+          <div class="lang" aria-label="Language switch">
+            <button id="btnIT" class="active" type="button">IT</button>
+            <button id="btnFR" type="button">FR</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="heroGrid">
+        <!-- LEFT: Emotional headline + BIG AI button -->
+        <div class="headlineCard">
+          <div class="kicker">
+            <span class="tag"><span class="dot"></span><span id="t_kicker1">Luxury & Discovery</span></span>
+            <span class="tag"><span class="dot"></span><span id="t_kicker2">Rooftop Terrace</span></span>
+            <span class="tag"><span class="dot"></span><span id="t_kicker3">Best Rate Guarantee</span></span>
+          </div>
+
+          <h2 class="headline" id="t_headline">
+            Soggiorna nel cuore di Monaco, con vista sul Port Hercule.
+          </h2>
+
+          <p class="sub" id="t_sub">
+            Un’esperienza raffinata, luminosa e senza fretta: mare, yacht, shopping e cultura a pochi passi.
+            Lasciati guidare dal nostro assistente AI per scegliere la camera ideale, i servizi e i migliori momenti per visitare Monte-Carlo.
+          </p>
+
+          <div class="ctaRow">
+            <a class="ctaBig" id="ctaAI" href="ai.html">
+              <span aria-hidden="true">✨</span>
+              <span id="t_cta_big">Parla con l’assistente AI dell’Hotel</span>
+            </a>
+
+            <a class="ctaGhost" id="ctaBook" href="https://www.secure-reservation.cloud/" target="_blank" rel="noopener">
+              <span aria-hidden="true">🗓️</span>
+              <span id="t_cta_book">Prenota ora</span>
+            </a>
+          </div>
+
+          <p class="fine" id="t_fine">
+            Suggerimento: chiedi “consigli su camere con vista”, “cosa fare oggi a Monaco”, oppure “miglior periodo per il tuo soggiorno”.
+          </p>
+        </div>
+
+        <!-- RIGHT: Weather + Highlights -->
+        <div class="side">
+          <div class="card">
+            <div class="weatherTop">
+              <div class="wxMain">
+                <h3 id="t_weatherTitle">Meteo a Monaco</h3>
+                <div class="temp" id="wxTemp">—°</div>
+                <div class="wxMeta" id="wxDesc">Caricamento in corso…</div>
+              </div>
+              <div class="wxBadge" id="wxBadge">Port Hercule • Live</div>
+            </div>
+
+            <div class="forecast" aria-label="3 day forecast">
+              <div class="day">
+                <div class="d" id="d1">—</div>
+                <div class="t" id="t1">—</div>
+              </div>
+              <div class="day">
+                <div class="d" id="d2">—</div>
+                <div class="t" id="t2">—</div>
+              </div>
+              <div class="day">
+                <div class="d" id="d3">—</div>
+                <div class="t" id="t3">—</div>
+              </div>
+            </div>
+
+            <p class="muted" style="margin-top:10px" id="t_weatherHint">
+              Il clima del Principato rende perfetto un weekend di charme: passeggiate sul porto, rooftop al tramonto, serate Monte-Carlo.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 id="t_highlightsTitle">Monaco, in pochi istanti</h3>
+            <div class="highlights">
+              <div class="hl">
+                <b id="t_hl1_title">Iconico & glamour</b>
+                <span id="t_hl1">Casino, boutique di lusso, ristoranti d’autore e nightlife esclusiva.</span>
+              </div>
+              <div class="hl">
+                <b id="t_hl2_title">Mare & yacht</b>
+                <span id="t_hl2">Port Hercule: panorama nautico, luce mediterranea e atmosfera Riviera.</span>
+              </div>
+              <div class="hl">
+                <b id="t_hl3_title">Esperienze su misura</b>
+                <span id="t_hl3">L’assistente AI ti consiglia itinerari, transfer e timing perfetto per il tuo soggiorno.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lower editorial sections -->
+      <div class="sections">
+        <div class="grid3">
+          <article class="mediaCard">
+            <div class="media" style="background-image:url('https://www.hotelmiramar.mc/_novaimg/4803974-1462033_0_0_2492_3196_554_710.jpg');"></div>
+            <div class="mediaBody">
+              <h4 id="t_card1_title">Waterfront Location</h4>
+              <p id="t_card1">
+                Sul bordo del porto, tra il Rocher e Monte-Carlo: una posizione privilegiata per vivere Monaco a piedi, con stile.
+              </p>
+            </div>
+          </article>
+
+          <article class="mediaCard">
+            <div class="media" style="background-image:url('https://www.hotelmiramar.mc/_novaimg/4803977-1462276_0_0_2200_1600_1925_1400.jpg');"></div>
+            <div class="mediaBody">
+              <h4 id="t_card2_title">Rooms with a view</h4>
+              <p id="t_card2">
+                Camere curate, atmosfera marina contemporanea e dettagli pensati per un comfort elegante, senza eccessi.
+              </p>
+            </div>
+          </article>
+
+          <article class="mediaCard">
+            <div class="media" style="background-image:url('https://www.hotelmiramar.mc/_novaimg/4804618-1462277_0_0_2200_1600_1925_1400.jpg');"></div>
+            <div class="mediaBody">
+              <h4 id="t_card3_title">Rooftop moments</h4>
+              <p id="t_card3">
+                Colazioni lente, tramonti dorati, aria di mare: la tua giornata inizia e finisce con una vista memorabile.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <footer>
+          <div>
+            <div><strong id="t_footerHotel">Hotel Miramar Monaco</strong></div>
+            <div id="t_footerAddr">1 avenue JF Kennedy • 98000 Monaco</div>
+            <div>
+              <span id="t_footerTelLabel">Tel:</span>
+              <a href="tel:+37792002100">+377 92 00 21 00</a>
+              <span style="opacity:.55"> • </span>
+              <a href="mailto:info@hotelmiramar.mc">info@hotelmiramar.mc</a>
+            </div>
+          </div>
+          <div>
+            <div id="t_footerNote">Landing demo • CTA AI → ai.html</div>
+            <div><a href="https://www.hotelmiramar.mc/" target="_blank" rel="noopener" id="t_footerLink">Sito ufficiale</a></div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // -------------------------------
+    // i18n (IT/FR) + auto-detect
+    // -------------------------------
+    const I18N = {
+      it: {
+        brandSub: "Sea-front • Port Hercule • Monte-Carlo",
+        locationPill: "<strong>Monaco</strong> • Waterfront Location",
+        kicker1: "Luxury & Discovery",
+        kicker2: "Rooftop Terrace",
+        kicker3: "Best Rate Guarantee",
+        headline: "Soggiorna nel cuore di Monaco, con vista sul Port Hercule.",
+        sub:
+          "Un’esperienza raffinata, luminosa e senza fretta: mare, yacht, shopping e cultura a pochi passi. " +
+          "Lasciati guidare dal nostro assistente AI per scegliere la camera ideale, i servizi e i migliori momenti per visitare Monte-Carlo.",
+        ctaBig: "Parla con l’assistente AI dell’Hotel",
+        ctaBook: "Prenota ora",
+        fine:
+          "Suggerimento: chiedi “consigli su camere con vista”, “cosa fare oggi a Monaco”, oppure “miglior periodo per il tuo soggiorno”.",
+        weatherTitle: "Meteo a Monaco",
+        weatherHint:
+          "Il clima del Principato rende perfetto un weekend di charme: passeggiate sul porto, rooftop al tramonto, serate Monte-Carlo.",
+        highlightsTitle: "Monaco, in pochi istanti",
+        hl1t: "Iconico & glamour",
+        hl1: "Casino, boutique di lusso, ristoranti d’autore e nightlife esclusiva.",
+        hl2t: "Mare & yacht",
+        hl2: "Port Hercule: panorama nautico, luce mediterranea e atmosfera Riviera.",
+        hl3t: "Esperienze su misura",
+        hl3: "L’assistente AI ti consiglia itinerari, transfer e timing perfetto per il tuo soggiorno.",
+        card1t: "Waterfront Location",
+        card1: "Sul bordo del porto, tra il Rocher e Monte-Carlo: una posizione privilegiata per vivere Monaco a piedi, con stile.",
+        card2t: "Rooms with a view",
+        card2: "Camere curate, atmosfera marina contemporanea e dettagli pensati per un comfort elegante, senza eccessi.",
+        card3t: "Rooftop moments",
+        card3: "Colazioni lente, tramonti dorati, aria di mare: la tua giornata inizia e finisce con una vista memorabile.",
+        footerHotel: "Hotel Miramar Monaco",
+        footerAddr: "1 avenue JF Kennedy • 98000 Monaco",
+        footerTelLabel: "Tel:",
+        footerNote: "Landing demo • CTA AI → ai.html",
+        footerLink: "Sito ufficiale",
+        wxLoading: "Caricamento in corso…",
+        wxFallback: "Parzialmente soleggiato • Dati di esempio"
+      },
+      fr: {
+        brandSub: "Front de mer • Port Hercule • Monte-Carlo",
+        locationPill: "<strong>Monaco</strong> • Front de mer",
+        kicker1: "Luxe & Découverte",
+        kicker2: "Terrasse Rooftop",
+        kicker3: "Meilleur Tarif Garanti",
+        headline: "Séjournez au cœur de Monaco, face au Port Hercule.",
+        sub:
+          "Une expérience raffinée, lumineuse et sans précipitation : mer, yachts, shopping et culture à quelques pas. " +
+          "Laissez-vous guider par notre assistant IA pour choisir la chambre idéale, les services et le meilleur moment pour visiter Monte-Carlo.",
+        ctaBig: "Parlez avec l’assistant IA de l’Hôtel",
+        ctaBook: "Réserver",
+        fine:
+          "Astuce : demandez “chambres avec vue”, “que faire aujourd’hui à Monaco” ou “meilleure période pour votre séjour”.",
+        weatherTitle: "Météo à Monaco",
+        weatherHint:
+          "Le climat de la Principauté est parfait pour un week-end chic : promenade au port, rooftop au coucher du soleil, soirées Monte-Carlo.",
+        highlightsTitle: "Monaco, en un instant",
+        hl1t: "Iconique & glamour",
+        hl1: "Casino, boutiques de luxe, tables d’exception et nightlife exclusive.",
+        hl2t: "Mer & yachts",
+        hl2: "Port Hercule : panorama nautique, lumière méditerranéenne et esprit Riviera.",
+        hl3t: "Sur-mesure",
+        hl3: "L’assistant IA vous recommande itinéraires, transferts et timing idéal pour votre séjour.",
+        card1t: "Front de mer",
+        card1: "Au bord du port, entre le Rocher et Monte-Carlo : une adresse privilégiée pour vivre Monaco à pied, avec élégance.",
+        card2t: "Chambres avec vue",
+        card2: "Chambres soignées, ambiance marine contemporaine et détails pensés pour un confort chic, sans excès.",
+        card3t: "Instants rooftop",
+        card3: "Petits-déjeuners tranquilles, couchers de soleil dorés, air marin : votre journée commence et finit avec une vue mémorable.",
+        footerHotel: "Hotel Miramar Monaco",
+        footerAddr: "1 avenue JF Kennedy • 98000 Monaco",
+        footerTelLabel: "Tél :",
+        footerNote: "Landing démo • CTA IA → ai.html",
+        footerLink: "Site officiel",
+        wxLoading: "Chargement…",
+        wxFallback: "Partiellement ensoleillé • Données d’exemple"
+      }
+    };
+
+    const els = {
+      brandSub: document.getElementById("t_brand_sub"),
+      locationPill: document.getElementById("t_locationPill"),
+      kicker1: document.getElementById("t_kicker1"),
+      kicker2: document.getElementById("t_kicker2"),
+      kicker3: document.getElementById("t_kicker3"),
+      headline: document.getElementById("t_headline"),
+      sub: document.getElementById("t_sub"),
+      ctaBig: document.getElementById("t_cta_big"),
+      ctaBook: document.getElementById("t_cta_book"),
+      fine: document.getElementById("t_fine"),
+      weatherTitle: document.getElementById("t_weatherTitle"),
+      weatherHint: document.getElementById("t_weatherHint"),
+      highlightsTitle: document.getElementById("t_highlightsTitle"),
+      hl1t: document.getElementById("t_hl1_title"),
+      hl1: document.getElementById("t_hl1"),
+      hl2t: document.getElementById("t_hl2_title"),
+      hl2: document.getElementById("t_hl2"),
+      hl3t: document.getElementById("t_hl3_title"),
+      hl3: document.getElementById("t_hl3"),
+      card1t: document.getElementById("t_card1_title"),
+      card1: document.getElementById("t_card1"),
+      card2t: document.getElementById("t_card2_title"),
+      card2: document.getElementById("t_card2"),
+      card3t: document.getElementById("t_card3_title"),
+      card3: document.getElementById("t_card3"),
+      footerHotel: document.getElementById("t_footerHotel"),
+      footerAddr: document.getElementById("t_footerAddr"),
+      footerTelLabel: document.getElementById("t_footerTelLabel"),
+      footerNote: document.getElementById("t_footerNote"),
+      footerLink: document.getElementById("t_footerLink"),
+    };
+
+    const btnIT = document.getElementById("btnIT");
+    const btnFR = document.getElementById("btnFR");
+
+    function setLang(lang){
+      const t = I18N[lang] || I18N.it;
+
+      els.brandSub.textContent = t.brandSub;
+      els.locationPill.innerHTML = t.locationPill;
+
+      els.kicker1.textContent = t.kicker1;
+      els.kicker2.textContent = t.kicker2;
+      els.kicker3.textContent = t.kicker3;
+
+      els.headline.textContent = t.headline;
+      els.sub.textContent = t.sub;
+
+      els.ctaBig.textContent = t.ctaBig;
+      els.ctaBook.textContent = t.ctaBook;
+
+      els.fine.textContent = t.fine;
+
+      els.weatherTitle.textContent = t.weatherTitle;
+      els.weatherHint.textContent = t.weatherHint;
+
+      els.highlightsTitle.textContent = t.highlightsTitle;
+      els.hl1t.textContent = t.hl1t;
+      els.hl1.textContent = t.hl1;
+      els.hl2t.textContent = t.hl2t;
+      els.hl2.textContent = t.hl2;
+      els.hl3t.textContent = t.hl3t;
+      els.hl3.textContent = t.hl3;
+
+      els.card1t.textContent = t.card1t;
+      els.card1.textContent = t.card1;
+      els.card2t.textContent = t.card2t;
+      els.card2.textContent = t.card2;
+      els.card3t.textContent = t.card3t;
+      els.card3.textContent = t.card3;
+
+      els.footerHotel.textContent = t.footerHotel;
+      els.footerAddr.textContent = t.footerAddr;
+      els.footerTelLabel.textContent = t.footerTelLabel;
+      els.footerNote.textContent = t.footerNote;
+      els.footerLink.textContent = t.footerLink;
+
+      btnIT.classList.toggle("active", lang === "it");
+      btnFR.classList.toggle("active", lang === "fr");
+
+      document.documentElement.lang = lang;
+      localStorage.setItem("lang", lang);
+    }
+
+    btnIT.addEventListener("click", () => setLang("it"));
+    btnFR.addEventListener("click", () => setLang("fr"));
+
+    // Auto language (browser) with saved override
+    (function initLang(){
+      const saved = localStorage.getItem("lang");
+      if (saved === "it" || saved === "fr") return setLang(saved);
+      const nav = (navigator.language || "it").toLowerCase();
+      setLang(nav.startsWith("fr") ? "fr" : "it");
+    })();
+
+    // ---------------------------------
+    // Live Weather (Monaco coords)
+    // Uses Open-Meteo (no key).
+    // ---------------------------------
+    const wxTemp = document.getElementById("wxTemp");
+    const wxDesc = document.getElementById("wxDesc");
+
+    const d1 = document.getElementById("d1");
+    const d2 = document.getElementById("d2");
+    const d3 = document.getElementById("d3");
+    const t1 = document.getElementById("t1");
+    const t2 = document.getElementById("t2");
+    const t3 = document.getElementById("t3");
+
+    function fmtDay(iso){
+      const dt = new Date(iso);
+      const lang = document.documentElement.lang || "it";
+      return dt.toLocaleDateString(lang === "fr" ? "fr-FR" : "it-IT", { weekday:"short" });
+    }
+    function wxCodeToText(code, lang){
+      const it = {
+        0:"Sereno", 1:"Prevalentemente sereno", 2:"Parzialmente nuvoloso", 3:"Nuvoloso",
+        45:"Nebbia", 48:"Nebbia con brina", 51:"Pioviggine debole", 53:"Pioviggine", 55:"Pioviggine intensa",
+        61:"Pioggia debole", 63:"Pioggia", 65:"Pioggia intensa", 80:"Rovesci deboli", 81:"Rovesci", 82:"Rovesci intensi",
+        95:"Temporale"
+      };
+      const fr = {
+        0:"Ensoleillé", 1:"Plutôt ensoleillé", 2:"Partiellement nuageux", 3:"Nuageux",
+        45:"Brouillard", 48:"Brouillard givrant", 51:"Bruine faible", 53:"Bruine", 55:"Bruine forte",
+        61:"Pluie faible", 63:"Pluie", 65:"Pluie forte", 80:"Averses faibles", 81:"Averses", 82:"Fortes averses",
+        95:"Orage"
+      };
+      const dict = (lang === "fr") ? fr : it;
+      return dict[code] || ((lang==="fr") ? "Conditions" : "Condizioni");
+    }
+
+    async function loadWeather(){
+      const lang = document.documentElement.lang || "it";
+      wxDesc.textContent = I18N[lang].wxLoading;
+
+      // Monaco (Port Hercule area)
+      const lat = 43.7369725;
+      const lon = 7.4229654;
+
+      const url =
+        "https://api.open-meteo.com/v1/forecast" +
+        `?latitude=${lat}&longitude=${lon}` +
+        "&current=temperature_2m,weather_code,wind_speed_10m" +
+        "&daily=temperature_2m_max,temperature_2m_min,weather_code" +
+        "&timezone=Europe%2FMonaco";
+
+      try{
+        const res = await fetch(url, { cache: "no-store" });
+        const data = await res.json();
+
+        const temp = Math.round(data.current.temperature_2m);
+        const wind = Math.round(data.current.wind_speed_10m);
+        const code = data.current.weather_code;
+
+        wxTemp.textContent = `${temp}°C`;
+        wxDesc.textContent =
+          `${wxCodeToText(code, lang)} • ` +
+          (lang === "fr" ? `Vent ${wind} km/h` : `Vento ${wind} km/h`);
+
+        const days = data.daily.time.slice(0,3);
+        const maxs = data.daily.temperature_2m_max.slice(0,3).map(x => Math.round(x));
+        const mins = data.daily.temperature_2m_min.slice(0,3).map(x => Math.round(x));
+
+        d1.textContent = fmtDay(days[0]);
+        d2.textContent = fmtDay(days[1]);
+        d3.textContent = fmtDay(days[2]);
+
+        t1.textContent = `${mins[0]}° / ${maxs[0]}°`;
+        t2.textContent = `${mins[1]}° / ${maxs[1]}°`;
+        t3.textContent = `${mins[2]}° / ${maxs[2]}°`;
+      } catch(e){
+        // Fallback (example values)
+        const lang = document.documentElement.lang || "it";
+        wxTemp.textContent = "14°C";
+        wxDesc.textContent = I18N[lang].wxFallback;
+
+        d1.textContent = (lang==="fr") ? "jeu." : "gio.";
+        d2.textContent = (lang==="fr") ? "ven." : "ven.";
+        d3.textContent = (lang==="fr") ? "sam." : "sab.";
+
+        t1.textContent = "9° / 17°";
+        t2.textContent = "9° / 15°";
+        t3.textContent = "8° / 14°";
+      }
+    }
+
+    loadWeather();
+
+    // Reload weather text if language changes
+    const _setLang = setLang;
+    setLang = function(lang){
+      _setLang(lang);
+      loadWeather();
+    };
+  </script>
+</body>
+</html>
